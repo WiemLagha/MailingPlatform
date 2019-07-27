@@ -1,0 +1,22 @@
+#lock{
+    opacity: 0.5;
+    display: flex;
+    height: 400px;
+    width: 400px;
+}
+#title{
+    margin-left: 90px;
+    text-shadow: 2px 2px 8px #707070;
+}
+
+#background{
+    background-color: #0A96E6;
+    padding-top: 5%;
+    padding-bottom: 95px;
+}
+
+#frame{
+    background-color: white; 
+    align-self: center;
+    margin-top: 40px;
+}
