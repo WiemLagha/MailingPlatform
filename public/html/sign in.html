@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <script src="../../routes/pages.js"></script>
     
 
 </head>
 
 <body>
-        <script src="../js/connection.js"> </script>
-    <form method="POST" action="../js/connection.js">
+       
+    <form method="POST" >
         <section id="background">
             <div class="container">
                 <div class="row">
@@ -31,13 +32,12 @@
                         <div id="frame" class="shadow p-3 mb-5 bg-white rounded">
                             <p id="title-2">Sign in</p>
                             <p id="subtitle">mail adress</p>
-                            <input type="text" name="username" placeholder="enter your username">
+                            <input type="text" name="username" placeholder="enter your username" required>
 
                             <p id="subtitle">password</p>
-                            <input type="password" name="password" placeholder="enter your password">
+                            <input type="password" name="password" placeholder="enter your password" required>
                             </br>
-                            <button type="button" class="btn btn-outline-primary" id="round" value="submit">Log
-                                in</button>
+                            <button type="submit" class="btn btn-outline-primary" id="round" value="submit" formaction="/sign%20in" formaction="/campaigns">Log in</button>
                             </br>
                             </br>
 

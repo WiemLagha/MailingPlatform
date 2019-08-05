@@ -1,5 +1,6 @@
 const express=require('express');
 const path=require('path');
+var session = require('express-session');
 const app=express();
 const pageRouter=require('./routes/pages');
 
@@ -9,6 +10,12 @@ app.use(express.urlencoded({extended:false}));
 //serve static files
 //modified
 app.use(express.static(path.join(__dirname,'public')));
+
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
 //template engine
 /*
