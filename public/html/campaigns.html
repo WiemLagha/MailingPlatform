@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <form method="POST">
+  <form method="POST" action="/fileUpload" enctype="multipart/form-data">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
 
@@ -35,8 +35,13 @@
       <button type="button" class="btn btn-outline-primary nav-button" id="round" value="submit">Start a
         campaign</button>
     </nav>
+    <div id="upload">
+      <input type="file" name="cantactsFile" name="filetoupload">
+      <button type="submit" class="btn btn-outline-primary" id="round">Submit</button>
+    </div>
+
+
     <div>
-      <input type="file" name="cantactsFile" value="Add new list">
       <table id="campaigns">
         <tr>
           <th>Campaign</th>

@@ -26,3 +26,8 @@ table {
     margin-left: 20px;
       margin-top: 4%;
   }
+
+  #upload{
+    display: block;
+    align-items: baseline;
+  }

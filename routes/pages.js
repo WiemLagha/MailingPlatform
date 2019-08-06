@@ -24,12 +24,14 @@ router.post('/campaigns', (req, res, next) => {
     res.sendFile('campaigns.html', { root: './public/html' });
 });
 
-function getData() {
+/** extract data
+ *  function getData() {
     var table = document.getElementById("campaigns");
     var row = table.insertRow(1);
-    
-  }
-  
+
+}
+*/
+
 
 /** 
 //post login data
@@ -74,6 +76,10 @@ router.post('/sign%20in', function (request, response) {
         response.end();
     }
 });
+
+//upload file
+
+
 
 //post sign up data
 router.post('/sign%up', (req, res, next) => {
