@@ -4,7 +4,6 @@ var session = require('express-session');
 const app=express();
 const pageRouter=require('./routes/pages');
 const upload=require('express-fileupload');
-app.use(upload());
 
 
 //for body parser
@@ -32,11 +31,7 @@ app.set('view engine', 'html');
 
 //routers
 app.use(pageRouter);
-app.post('/fileUpload',function(req,res){
-    if(req.files){
-        console.log(req.files)
-    }
-});
+
 
 //setting up the server
 app.listen(3000, ()=>{
