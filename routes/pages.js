@@ -4,6 +4,7 @@ const pool = require('../core/pool');
 const router = express.Router();
 const http = require('http');
 const fs = require('fs');
+const mysql=require('mysql');
 var multer = require('multer');
 const csv = require('csv-parse');
 const upload = multer({ dest: '/uploads' });
@@ -88,11 +89,11 @@ router.post('/fileUpload', upload.single('filetoupload'), function (req, res) {
     //read
     fs.createReadStream(file.path).pipe(csv()).on('data', function (data) {
         data.forEach(function (email) {
-            pool.query('INSERT INTO mails (mail_address) VALUES (?) ;',[email],function(err,result){
-                if(err){
-                    console.log(err);
-                }
-            });
+           let sql="INSERT INTO mails(mail_adress) VALUES (?);";
+           let query= pool.query(sql,email,(err,result)=>{
+               if(err) throw err;
+               else res.end();
+           });
         });
     });
 });
