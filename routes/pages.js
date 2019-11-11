@@ -4,7 +4,7 @@ const pool = require('../core/pool');
 const router = express.Router();
 const http = require('http');
 const fs = require('fs');
-const mysql=require('mysql');
+const mysql = require('mysql');
 var multer = require('multer');
 const csv = require('csv-parse');
 const upload = multer({ dest: '/uploads' });
@@ -27,34 +27,14 @@ router.get('/sign%20up', (req, res, next) => {
 });
 
 router.post('/campaigns', (req, res, next) => {
-    res.sendFile('campaigns.html', { root: './public/html' });
-});
-
-/** extract data
- *  function getData() {
-    var table = document.getElementById("campaigns");
-    var row = table.insertRow(1);
-
-}
-*/
+   
+        res.render('campaigns.ejs');
+        
+    });
 
 
-/** 
-//post login data
-router.post('/sign%20in', (req, res, next) => {
-    user.login(req.body.username, req.body.password, function (result) {
-        if (result) {
-            //get campaigns page
-                res.sendFile('campaigns.html', { root: './public/html' });
-        }
-        else
-            //failureFlash: true
-            console.log('verify login and password...');
 
-    })
-});
 
-*/
 //post login data
 router.post('/sign%20in', function (request, response) {
     var username = request.body.username;
@@ -66,12 +46,7 @@ router.post('/sign%20in', function (request, response) {
                 request.session.username = username;
                 response.redirect(307, '/campaigns');
             } else {
-                /*var popupS = require('popups');
-
-                popupS.alert({
-                    content: 'Hello!',
-                    
-                });*/
+               
                 console.log('verify address and password...');
 
             }
@@ -88,39 +63,42 @@ router.post('/fileUpload', upload.single('filetoupload'), function (req, res) {
     var file = req.file;
     //read
     fs.createReadStream(file.path).pipe(csv()).on('data', function (data) {
+        var username = req.session.username;
+        var list_name = req.body.list_name;
+
         data.forEach(function (email) {
-           let sql="INSERT INTO mails(mail_adress) VALUES (?);";
-           let query= pool.query(sql,email,(err,result)=>{
-               if(err) throw err;
-               else res.end();
-           });
+            let sql = "INSERT INTO contact_list(mail_adress,username,list_name) VALUES (?,?,?);";
+            let query = pool.query(sql, [email, username, list_name], (err, result) => {
+                if (err) throw err;
+                else {
+                    res.redirect(307, '/campaigns');
+                    res.end();
+                }
+            });
         });
+
     });
 });
 
+//post sign up data
+router.post('/sign%up', (req, res, next) => {
+    let userInput = {
+        username: req.body.username,
+        password: req.body.password,
+        mail: req.body.mail,
+        company: req.body.company,
+        city: req.body.company,
+        code: req.body.code
+    };
 
+    user.create(userInput, function (lastId) {
+        if (lastId) {
+            res.sendFile('campaigns.html', { root: './public/html' });
+        }
+        else {
+            console.log('Error creating a new user');
+        }
+    });
+});
 
-
-    //post sign up data
-    router.post('/sign%up', (req, res, next) => {
-        let userInput = {
-            username: req.body.username,
-            password: req.body.password,
-            mail: req.body.mail,
-            company: req.body.company,
-            city: req.body.company,
-            code: req.body.code
-        };
-
-        user.create(userInput, function (lastId) {
-            if (lastId) {
-                res.sendFile('campaigns.html', { root: './public/html' });
-            }
-            else {
-                console.log('Error creating a new user');
-            }
-        });
-    })
-
-
-    module.exports = router;
+module.exports = router;

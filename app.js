@@ -19,11 +19,7 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-//template engine
-/*
-    *app.set('views',path.join(__dirname,'views'));
-    *app.set('view engine','pug');
-*/
+
 
 //set template engine (html)
 app.engine('html', require('ejs').renderFile);

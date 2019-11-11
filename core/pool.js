@@ -8,7 +8,7 @@ const pool=mysql.createPool({
     host: "localhost",
     user: "root",
     password: "",
-    database:"mailingplatform"
+    database:"mailingplatformdb"
 });
 
 pool.getConnection((err, Connection)=>{

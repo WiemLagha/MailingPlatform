@@ -51,14 +51,11 @@
     </div>
     <div>
       <p id="sub">Existing lists:</p>
-
       <ul>
-
-        <li id="li">
-        
-        </li>
-      </ul>
-
+        <% todolist.forEach(function(todo, index) { %>
+            <li><a href="/todo/supprimer/<%= index %>">✘</a> <%= todo %></li>
+        <% }); %>
+        </ul>
 
       </table>
     </div>
